@@ -1,0 +1,20 @@
+#use_frameworks!
+
+platform :ios, '10.0'
+
+target 'TranslateUtil_Example' do
+  pod 'TranslateUtil', :path => '../'
+
+  target 'TranslateUtil_Tests' do
+    inherit! :search_paths
+
+    
+  end
+  pod 'GoogleMLKit/Translate'
+  pod 'GoogleMLKit/LanguageID'
+  pod 'GoogleMLKit/TextRecognition'
+  pod 'GoogleMLKit/TextRecognitionChinese'
+  pod 'GoogleMLKit/TextRecognitionDevanagari'
+  pod 'GoogleMLKit/TextRecognitionJapanese'
+  pod 'GoogleMLKit/TextRecognitionKorean'
+end
