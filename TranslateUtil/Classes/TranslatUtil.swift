@@ -21,6 +21,7 @@ public var AppEnterbackground = false
 public class TranslateUtil: NSObject {
     public static let share = TranslateUtil()
     public var duration = 15.0
+    public var wordLimit = 1000
     public var webTranslate: Bool {
         return isWebTranslate
     }
@@ -77,7 +78,7 @@ public class TranslateUtil: NSObject {
         }
     }
     
-    public func translate(text: String, sourceCode: String, targetCode: String, completion: @escaping (Bool,String)->Void) {
+    private func translate(text: String, sourceCode: String, targetCode: String, completion: @escaping (Bool,String)->Void) {
         debugPrint("[TR] 开始翻译")
         var progress = 0.0
         var duration = duration
@@ -246,6 +247,42 @@ extension TranslateUtil: WKUIDelegate, WKNavigationDelegate {
 }
 
 extension TranslateUtil {
+    
+    public func translate(text: String, source: Language, target: Language, completion: @escaping (Bool,String)->Void) {
+        
+        if text.count == 0 {
+            completion(false, "No text find now.")
+            return
+        }
+        
+        if text.count > wordLimit {
+            completion(false, "Too many words.")
+            return
+        }
+        
+        // 识别语言和翻译语言相同，点击翻译后，直接展示原文案作为结果，此时也认为翻译成功
+        if source == target {
+            debugPrint("[TR] 翻译完成.")
+            completion(true, text)
+            return
+        }
+        
+        var sourceCode = source.code
+        let targetCode = target.code
+        
+        if source == .Auto {
+            debugPrint("[TR] 开始识别源语言")
+            requestSourceCode(text: text) {[weak self] code in
+                sourceCode = code
+                debugPrint("[TR] 源语言识别成功\(code)")
+                self?.translate(text: text, sourceCode: sourceCode, targetCode: targetCode, completion: completion)
+            }
+        } else {
+            translate(text: text, sourceCode: sourceCode, targetCode: targetCode, completion: completion)
+        }
+    
+    }
+    
     public func ocrTranslate(source: String, image: UIImage, direction: UIImage.Orientation, completion: @escaping (Bool, String) -> Void) {
         
         var op: CommonTextRecognizerOptions

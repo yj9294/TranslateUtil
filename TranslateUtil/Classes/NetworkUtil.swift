@@ -29,7 +29,7 @@ public class NetworkUtil {
     private let queue = DispatchQueue(label: "NetworkConnectivityMonitor")
     private let monitor: NWPathMonitor
 
-    private(set) var isConnected = false
+    public var isConnected = false
     private(set) var isExpensive = false
     private(set) var currentConnectionType: NWInterface.InterfaceType?
 
