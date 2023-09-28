@@ -210,15 +210,15 @@ public class TranslateUtil: NSObject {
 
 extension TranslateUtil: WKUIDelegate, WKNavigationDelegate {
 
-    func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
+    public func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
         print("[TR] web加载开始")
     }
     
-    func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
+    public func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
         debugPrint("[TR] web加载失败.\(error.localizedDescription)")
     }
     
-    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+    public func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         debugPrint("[TR] web加载完成")
         let js = "document.getElementById('tta_output_ta').value"
         DispatchQueue.main.asyncAfter(deadline: .now() + 2.6) {

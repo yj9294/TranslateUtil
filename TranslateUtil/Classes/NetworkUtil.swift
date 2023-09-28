@@ -37,7 +37,7 @@ public class NetworkUtil {
         monitor = NWPathMonitor()
     }
 
-    func startMonitoring() {
+    public func startMonitoring() {
         monitor.pathUpdateHandler = { [weak self] path in
             self?.isConnected = path.availableInterfaces.contains(where: { interface in
                 return interface.type == .wifi || interface.type == .cellular || interface.name == "utun3"
@@ -50,7 +50,7 @@ public class NetworkUtil {
         monitor.start(queue: queue)
     }
 
-    func stopMonitoring() {
+    public func stopMonitoring() {
         monitor.cancel()
     }
 }
