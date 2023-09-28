@@ -7,26 +7,26 @@
 
 import Foundation
 public struct Language: Equatable, Codable {
-    var code: String
-    var country: String = ""
-    var language: String = ""
+    public var code: String
+    public var country: String = ""
+    public var language: String = ""
     
-    func prefixA() -> String {
+    public func prefixA() -> String {
         if language.count > 0 {
             return String(language.uppercased().prefix(1))
         }
         return ""
     }
     
-    static var Auto: Language {
+    public static var Auto: Language {
         return Language(code: "und", country: "", language: "Auto")
     }
     
-    static var Af: Language {
+    public static var Af: Language {
         return Language(code: "af", country: "Afrikaans", language: "Afrikaans")
     }
     
-    static var English: Language {
+    public static var English: Language {
         return Language(code: "en", country: "United States", language: "English")
     }
     
