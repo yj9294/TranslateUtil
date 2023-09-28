@@ -24,7 +24,7 @@ extension NWInterface.InterfaceType: CaseIterable {
 }
 
 public class NetworkUtil {
-    static let shared = NetworkUtil()
+    public static let shared = NetworkUtil()
 
     private let queue = DispatchQueue(label: "NetworkConnectivityMonitor")
     private let monitor: NWPathMonitor
