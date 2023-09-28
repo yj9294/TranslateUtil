@@ -18,7 +18,7 @@ import MLKitVision
 import WebKit
 
 public var AppEnterbackground = false
-class TranslateUtil: NSObject {
+public class TranslateUtil: NSObject {
     public static let share = TranslateUtil()
     public var duration = 15.0
     public var webTranslate: Bool {
